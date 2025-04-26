@@ -5,8 +5,7 @@
 [![MIT License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
 [![Status](https://img.shields.io/badge/status-Em%20Desenvolvimento-yellow)](https://github.com/Anna21112/finanflow)
 [![Node.js](https://img.shields.io/badge/Node.js-%3E%3D14.0.0-brightgreen)](https://nodejs.org/)
-[![PostgreSQL](https://img.shields.io/badge/PostgreSQL-%3E%3D12-blue)](https://www.postgresql.org/)
-[![MongoDB](https://img.shields.io/badge/MongoDB-%3E%3D4.0-success)](https://www.mongodb.com/)
+[![MYSQL](https://img.shields.io/badge/MySQL-%3E%3D8.0.0-blue)](https://www.mysql.com/)
 
 ---
 
@@ -28,6 +27,7 @@ O **FinanFlow** tem como objetivo ajudar pessoas a **gerenciarem suas finanças 
 - 📌 Categorizar receitas e despesas (padrões e personalizadas)
 - 📊 Visualizar saldo
 - 📆 Marcar contas como pagas ou pendentes
+- 📊 Evolução de despesas
 
 ---
 
@@ -52,8 +52,7 @@ Pessoas que desejam **organizar melhor seus gastos**, **sair das dívidas** e **
 
 ### 🗃 Banco de Dados
 
-- MongoDB → login/autenticação
-- PostgreSQL → receitas, despesas e categorias
+- PostgreSQL → utilizado para autenticação e armazenamento de dados financeiros (usuários, receitas, despesas e categorias)
 
 ---
 
@@ -66,8 +65,8 @@ Pessoas que desejam **organizar melhor seus gastos**, **sair das dívidas** e **
 
 ## 🔐 Segurança
 
-- 🔒 Autenticação com senha criptografada
-- 🔐 Login obrigatório para acessar dados financeiros
+- 🔒 Senhas criptografadas
+- 🔐 Autenticação obrigatória para acessar dados financeiros
 
 ---
 
@@ -86,7 +85,6 @@ Pessoas que desejam **organizar melhor seus gastos**, **sair das dívidas** e **
 ### 🔧 Pré-requisitos
 
 - [Node.js](https://nodejs.org)
-- [MongoDB](https://www.mongodb.com/)
 - [PostgreSQL](https://www.postgresql.org/)
 - Gerenciador de pacotes (npm ou yarn)
 

@@ -1,0 +1,30 @@
+{
+  "name": "finanflow",
+  "version": "1.0.0",
+  "description": "sistema de controle financeiro",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Anna21112/FinanFlow.git"
+  },
+  "author": "Anna Luisa Andrade da SIlva",
+  "license": "MIT",
+
+  "engines": {
+    "node": ">=22.0.0"
+  },
+  "bugs": {
+    "url": "https://github.com/Anna21112/FinanFlow/issues"
+  },
+  "homepage": "https://github.com/Anna21112/FinanFlow#readme",
+  "dependencies": {
+    "body-parser": "^2.2.0",
+    "cors": "^2.8.5",
+    "express": "^5.1.0",
+    "knex": "^3.1.0",
+    "morgan": "^1.10.0"
+  }
+}
