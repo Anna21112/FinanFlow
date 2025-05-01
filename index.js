@@ -8,6 +8,7 @@ const knex = require('knex');
 const { listUsers, getUserById, updateUser, deleteUser, insertUser } = require('./Controller/controllerUser');
 const { listCategories, getCategoryById, updateCategory, deleteCategory, insertCategory } = require('./Controller/controllerCategories');
 const { listExpenses, getExpenseById, updateExpense, deleteExpense, insertExpense } = require('./Controller/controllerExpenses');
+const { listRevenues, getRevenueById, updateRevenue, deleteRevenue, insertRevenue } = require('./Controller/controllerRevenues');
 
 //criando um servidor express
 
@@ -41,6 +42,13 @@ app.get('/expenses/:id', getExpenseById); // Rota para obter uma despesa especí
 app.put('/expenses/:id', updateExpense); // Rota para atualizar uma despesa específica pelo ID
 app.delete('/expenses/:id', deleteExpense); // Rota para deletar uma despesa específica pelo ID
 app.post('/expenses', insertExpense); // Rota para inserir uma nova despesa
+
+//ROUTES REVENUES
+app.get('/revenues', listRevenues); // Rota para listar todas as receitas
+app.get('/revenues/:id', getRevenueById); // Rota para obter uma receita específica pelo ID
+app.put('/revenues/:id', updateRevenue); // Rota para atualizar uma receita específica pelo ID
+app.delete('/revenues/:id', deleteRevenue); // Rota para deletar uma receita específica pelo ID
+app.post('/revenues', insertRevenue); // Rota para inserir uma nova receita
 
 
 // o servidor irá rodar dentro da porta 3000
