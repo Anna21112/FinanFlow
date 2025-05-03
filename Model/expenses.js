@@ -11,7 +11,7 @@ const selectExpenses = async () => {
 
 const selectExpenseById = async (id) => {
     try {
-        const result = await db('expenses').where({ id }).first();
+        const result = await db('expenses').where('idExpenses', id).first();
         return result;
     } catch (error) {
         console.error('Erro ao selecionar despesa:', error);
@@ -20,7 +20,7 @@ const selectExpenseById = async (id) => {
 
 const updateExpense = async (id, data) => {
     try {
-        const result = await db('expenses').where({ id }).update(data);
+        const result = await db('expenses').where('idExpenses', id).update(data);
         return result;
     } catch (error) {
         console.error('Erro ao atualizar despesa:', error);
@@ -29,7 +29,7 @@ const updateExpense = async (id, data) => {
 
 const deleteExpense = async (id) => {
     try {
-        const result = await db('expenses').where({ id }).del();
+        const result = await db('expenses').where('idExpenses', id).del();
         return result;
     } catch (error) {
         console.error('Erro ao deletar despesa:', error);

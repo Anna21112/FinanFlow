@@ -1,4 +1,4 @@
-const dbRevenues = require('../models/modelRevenues');
+const dbRevenues = require('../Model/revenues');
 
 // Lista todas as receitas do banco de dados
 const listRevenues = async (req, res) => {

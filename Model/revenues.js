@@ -13,7 +13,7 @@ async function selectRevenues(){
 //Busca uma receita pelo id
 async function selectRevenueById(id) {
     try {
-        const result = await db('revenues').where({ id }).first();
+        const result = await db('revenues').where('idRevenues', id).first();
         return result;
     } catch (error) {
         console.error('Erro ao selecionar receita:', error);
@@ -23,7 +23,7 @@ async function selectRevenueById(id) {
 //Edita uma receita pelo id
 async function updateRevenue(id, data) {
     try {
-        const result = await db('revenues').where({ id }).update(data);
+        const result = await db('revenues').where('idRevenues', id).update(data);
         return result;
     } catch (error) {
         console.error('Erro ao atualizar receita:', error);
@@ -33,7 +33,7 @@ async function updateRevenue(id, data) {
 //Deleta uma receita pelo id
 async function deleteRevenue(id) {
     try {
-        const result = await db('revenues').where({ id }).del();
+        const result = await db('revenues').where('idRevenues', id).del();
         return result;
     } catch (error) {
         console.error('Erro ao deletar receita:', error);

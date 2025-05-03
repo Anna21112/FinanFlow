@@ -1,4 +1,4 @@
-const dbCategories = require('../models/categories');
+const dbCategories = require('../Model/categories');
 
 const listCategories = async (req, res) => {
     try {
@@ -71,5 +71,6 @@ module.exports = {
     listCategories,
     getCategoryById,
     updateCategory,
-    deleteCategory
+    deleteCategory,
+    insertCategory
 }

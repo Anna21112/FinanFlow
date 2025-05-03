@@ -14,7 +14,7 @@ async function selectUsers() {
 // Função para buscar um usuário pelo ID
 async function selectUserById(id) {
     try {
-        const result = await db('users').where({ id }).first();
+        const result = await db('users').where('idUsers', id).first();
         return result;
     } catch (error) {
         console.error('Erro ao selecionar usuário:', error);
@@ -24,7 +24,7 @@ async function selectUserById(id) {
 // Função para atualizar um usuário pelo ID
 async function updateUser(id, data) {
     try {
-        const result = await db('users').where({ id }).update(data);
+        const result = await db('users').where('idUsers', id).update(data);
         return result;
     } catch (error) {
         console.error('Erro ao atualizar usuário:', error);
@@ -34,7 +34,7 @@ async function updateUser(id, data) {
 // Função para deletar um usuário pelo ID
 async function deleteUser(id) {
     try {
-        const result = await db('users').where({ id }).del();
+        const result = await db('users').where('idUsers', id).del();
         return result;
     } catch (error) {
         console.error('Erro ao deletar usuário:', error);

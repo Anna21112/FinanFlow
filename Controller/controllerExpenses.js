@@ -1,4 +1,4 @@
-const dbCategories = require('../models/expenses');
+const dbCategories = require('../Model/expenses');
 
 const listExpenses = async (req, res) => {
     try {
