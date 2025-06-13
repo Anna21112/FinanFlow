@@ -9,6 +9,9 @@ const { listUsers, getUserById, updateUser, deleteUser, insertUser } = require('
 const { listCategories, getCategoryById, updateCategory, deleteCategory, insertCategory } = require('./Controller/controllerCategories');
 const { listExpenses, getExpenseById, updateExpense, deleteExpense, insertExpense } = require('./Controller/controllerExpenses');
 const { listRevenues, getRevenueById, updateRevenue, deleteRevenue, insertRevenue } = require('./Controller/controllerRevenues');
+const authenticateToken = require('./middleware/auth');
+const { loginUser, refreshToken, logoutUser } = require('./Controller/controllerAuth');
+
 
 //criando um servidor express
 
@@ -20,7 +23,8 @@ app.use(morgan('dev'));
 app.use(cors());
 app.use(bodyParser.json());
 /* O body-parser.urlencoded() no Express.js é um middleware que analisa o corpo de uma requisição HTTP que contém dados codificados como URL. Isso é útil quando você está recebendo dados de formulários ou dados que foram enviados no formato application/x-www-form-urlencoded, que é o formato padrão para envio de dados de formulários HTML*/
-app.use(bodyParser.urlencoded({ extended: true })); 
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(authenticateToken);
 
 //ROUTES USERS
 app.get('/listusers', listUsers); // Rota para listar todos os usuários
@@ -49,6 +53,7 @@ app.get('/revenues/:id', getRevenueById); // Rota para obter uma receita especí
 app.put('/revenues/:id', updateRevenue); // Rota para atualizar uma receita específica pelo ID
 app.delete('/revenues/:id', deleteRevenue); // Rota para deletar uma receita específica pelo ID
 app.post('/revenues', insertRevenue); // Rota para inserir uma nova receita
+
 
 
 // o servidor irá rodar dentro da porta 3000

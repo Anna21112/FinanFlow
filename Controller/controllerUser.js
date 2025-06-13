@@ -68,11 +68,28 @@ const insertUser = async (req, res) => {
     }
 }
 
+const loginUser = async (req, res) => {
+    const { email, pass } = req.body;
+    try {
+        const user = await dbUsers.selectUsers();
+        const foundUser = user.find(u => u.email === email && u.pass === pass);
+        if (!foundUser) {
+            return res.status(401).json({ message: 'E-mail ou senha inválidos' });
+        }
+        // Aqui você pode gerar um token JWT se desejar
+        res.json({ message: 'Login realizado com sucesso', user: foundUser });
+    } catch (error) {
+        console.error('Erro ao fazer login:', error);
+        res.status(500).json({ error: 'Erro ao fazer login' });
+    }
+}
+
 // Exportando as funções para serem utilizadas em outros arquivos
 module.exports = {
     listUsers,
     getUserById,
     updateUser,
     deleteUser,
-    insertUser
+    insertUser,
+    loginUser
 }
