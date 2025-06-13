@@ -54,7 +54,10 @@ app.put('/revenues/:id', updateRevenue); // Rota para atualizar uma receita espe
 app.delete('/revenues/:id', deleteRevenue); // Rota para deletar uma receita específica pelo ID
 app.post('/revenues', insertRevenue); // Rota para inserir uma nova receita
 
-
+//ROUTES AUTH
+app.post('/login', loginUser); // Rota para login de usuário
+app.post('/refresh-token', refreshToken); // Rota para atualizar o token de acesso
+app.post('/logout', logoutUser); // Rota para logout de usuário
 
 // o servidor irá rodar dentro da porta 3000
 app.listen(3000, () => {
