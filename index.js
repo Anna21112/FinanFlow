@@ -24,14 +24,23 @@ app.use(cors());
 app.use(bodyParser.json());
 /* O body-parser.urlencoded() no Express.js é um middleware que analisa o corpo de uma requisição HTTP que contém dados codificados como URL. Isso é útil quando você está recebendo dados de formulários ou dados que foram enviados no formato application/x-www-form-urlencoded, que é o formato padrão para envio de dados de formulários HTML*/
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(authenticateToken);
+
+//ROUTES AUTH
+app.post('/login', loginUser); // Rota para login de usuário
+app.post('/refresh-token', refreshToken); // Rota para atualizar o token de acesso
+app.post('/logout', logoutUser); // Rota para logout de usuário
+app.post('/users', insertUser); 
+
+// Middleware para autenticação de token
+app.use(authenticateToken); // Middleware para autenticação de token em todas as rotas abaixo
+
 
 //ROUTES USERS
-app.get('/listusers', listUsers); // Rota para listar todos os usuários
-app.get('/users/:id', getUserById); // Rota para obter um usuário específico pelo ID
+app.get('/listusers',  listUsers); // Rota para listar todos os usuários
+app.get('/users/:id',  getUserById); // Rota para obter um usuário específico pelo ID
 app.put('/users/:id', updateUser); // Rota para atualizar um usuário específico pelo ID
 app.delete('/users/:id', deleteUser); // Rota para deletar um usuário específico pelo ID
-app.post('/users', insertUser); // Rota para inserir um novo usuário
+// Rota para inserir um novo usuário
 
 //ROUTES CATEGORIES
 app.get('/categories', listCategories); // Rota para listar todas as categorias
@@ -53,11 +62,6 @@ app.get('/revenues/:id', getRevenueById); // Rota para obter uma receita especí
 app.put('/revenues/:id', updateRevenue); // Rota para atualizar uma receita específica pelo ID
 app.delete('/revenues/:id', deleteRevenue); // Rota para deletar uma receita específica pelo ID
 app.post('/revenues', insertRevenue); // Rota para inserir uma nova receita
-
-//ROUTES AUTH
-app.post('/login', loginUser); // Rota para login de usuário
-app.post('/refresh-token', refreshToken); // Rota para atualizar o token de acesso
-app.post('/logout', logoutUser); // Rota para logout de usuário
 
 // o servidor irá rodar dentro da porta 3000
 app.listen(3000, () => {
