@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <title>FinanFlow - Cadastro</title>
+    <link rel="stylesheet" href="../css/register.css" />
+  </head>
+  <body>
+    <form class="register-container" id="registerForm">
+      <img src="../img/logo.png" alt="Logo FinanFlow" class="logo" />
+      <div>
+        <label for="name">Nome</label>
+        <input type="text" id="name" placeholder="Digite seu nome" required />
+      </div>
+      <div>
+        <label for="email">Email</label>
+        <input
+          type="email"
+          id="email"
+          placeholder="Digite seu email"
+          required
+        />
+      </div>
+      <div>
+        <label for="password">Senha</label>
+        <input
+          type="password"
+          id="password"
+          placeholder="Digite sua senha"
+          required
+        />
+      </div>
+      <div>
+        <label for="confirmPassword">Confirmar Senha</label>
+        <input
+          type="password"
+          id="confirmPassword"
+          placeholder="Confirme sua senha"
+          required
+        />
+      </div>
+      <div style="text-align: left; margin-bottom: 10px">
+        <input type="checkbox" id="terms" required />
+        <label for="terms" style="display: inline">
+          Li e aceito os
+          <a href="/terms" target="_blank"
+            >termos de privacidade</a
+          >
+        </label>
+      </div>
+      <div class="error" id="errorMsg"></div>
+      <button type="submit">Cadastrar</button>
+      <div class="links">Já tem uma conta? <a href="/login">Entrar</a></div>
+    </form>
+    <script src="../js/register.js"></script>
+  </body>
+</html>

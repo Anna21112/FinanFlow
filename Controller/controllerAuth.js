@@ -6,17 +6,24 @@ const REFRESH_SECRET = 'seu_segredo_refresh';
 let refreshTokens = []; 
 
 const loginUser = async (req, res) => {
+
+    console.log("Email recebido:", req.body.email);
+    console.log("Senha recebida:", req.body.pass);
+
     const { email, pass } = req.body;
     try {
         const users = await dbUsers.selectUsers();
-        const foundUser = users.find(u => u.email === email && u.pass === pass);
+        console.log("Usuários encontrados:", users);
+        const foundUser = users.find(u => u.email == email && u.pass == pass);
+
+        console.log(foundUser)
         if (!foundUser) {
             return res.status(401).json({ message: 'E-mail ou senha inválidos' });
         }
         const accessToken = jwt.sign(
             { id: foundUser.idUsers, email: foundUser.email },
             ACCESS_SECRET,
-            { expiresIn: '1h' }
+            { expiresIn: '8h' }
         );
         const refreshToken = jwt.sign(
             { id: foundUser.idUsers, email: foundUser.email },

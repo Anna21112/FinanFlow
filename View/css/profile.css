@@ -1,0 +1,109 @@
+body {
+    background: #b3d0ec;
+    font-family: 'Times New Roman', Times, serif;
+}
+
+.navbar {
+    background: #2a4270;
+    color: #fff;
+    padding: 18px 0 18px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-left: 60px;
+    padding-right: 60px;
+}
+.navbar .logo {
+    font-size: 1.5rem;
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+.navbar .menu a {
+    color: #fff;
+    text-decoration: none;
+    margin-left: 32px;
+    font-size: 1.1rem;
+}
+.navbar .menu a:hover {
+    text-decoration: underline;
+}
+.content {
+    max-width: 800px;
+    margin: 40px auto 0 auto;
+    background: #fff;
+    border-radius: 18px;
+    padding: 40px 40px 30px 40px;
+    box-shadow: 0 2px 16px rgba(0,0,0,0.07);
+}
+
+.profile-container {
+    background: #fff;
+    max-width: 400px;
+    margin: 60px auto;
+    padding: 40px 30px 30px 30px;
+    border-radius: 16px;
+    box-shadow: 0 2px 16px rgba(0,0,0,0.07);
+    text-align: center;
+}
+
+.profile-container h1 {
+    margin-bottom: 24px;
+    color: #142047;
+    font-size: 2rem;
+}
+
+.profile-container label {
+    display: block;
+    text-align: left;
+    margin-bottom: 6px;
+    color: #142047;
+    font-weight: 500;
+}
+
+.profile-container input[type="text"],
+.profile-container input[type="email"],
+.profile-container input[type="password"] {
+    width: 90%;
+    padding: 10px 12px;
+    margin-bottom: 18px;
+    border: 1px solid #dbe2ea;
+    border-radius: 6px;
+    font-size: 1rem;
+    background: #f7f9fb;
+}
+
+.profile-container input[type="checkbox"] {
+    margin-right: 6px;
+}
+
+.profile-container button {
+    width: 100%;
+    padding: 12px;
+    background: #0f2658;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 8px;
+}
+
+.profile-container button:hover {
+    background: #1746a2;
+}
+
+.profile-container .links {
+    margin-top: 18px;
+    font-size: 0.98rem;
+}
+
+.profile-container .links a {
+    color: #e11d48;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.profile-container .links a:hover {
+    text-decoration: underline;
+}

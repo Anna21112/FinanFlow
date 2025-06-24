@@ -58,31 +58,46 @@ const deleteUser = async (req, res) => {
 }
 
 const insertUser = async (req, res) => {
-    const data = req.body; // Obtém os dados do novo usuário a serem inseridos a partir do corpo da requisição
+    const { email, name, pass } = req.body; // Obtém os dados do novo usuário
     try {
-        const newUser = await dbUsers.insertUser(data); // Chama a função para inserir o novo usuário no banco de dados
-        res.status(201).json({ message: 'Usuário inserido com sucesso', userId: newUser[0] }); // Retorna uma mensagem de sucesso e o ID do novo usuário
+        // Verifica se o e-mail já existe
+        const existingUser = await dbUsers.selectUserByEmail(email);
+        if (existingUser) {
+            return res.status(400).json({ message: 'E-mail já cadastrado. Por favor, use outro e-mail.' });
+        }
+
+        // Insere o novo usuário
+        const newUser = await dbUsers.insertUser({ email, name, pass });
+        res.status(201).json({ message: 'Usuário inserido com sucesso', userId: newUser[0] });
     } catch (error) {
         console.error('Erro ao inserir usuário:', error);
         res.status(500).json({ error: 'Erro ao inserir usuário' });
     }
-}
+};
 
 const loginUser = async (req, res) => {
     const { email, pass } = req.body;
     try {
-        const user = await dbUsers.selectUsers();
-        const foundUser = user.find(u => u.email === email && u.pass === pass);
-        if (!foundUser) {
+        const user = await dbUsers.selectUserByEmail(email);
+
+        if (!user || user.pass !== pass) {
             return res.status(401).json({ message: 'E-mail ou senha inválidos' });
         }
-        // Aqui você pode gerar um token JWT se desejar
-        res.json({ message: 'Login realizado com sucesso', user: foundUser });
+
+        const accessToken = jwt.sign({ id: user.idUsers }, SECRET, { expiresIn: '1h' }); // Use idUsers aqui
+        const refreshToken = jwt.sign({ id: user.idUsers }, SECRET, { expiresIn: '7d' }); // Use idUsers aqui
+        console.log('Usuário logado:', user.idUsers); // Log do ID do usuário
+        
+        res.json({
+            accessToken,
+            refreshToken,
+            userId: user.idUsers // Certifique-se de que o ID do usuário está sendo retornado corretamente
+        });
     } catch (error) {
         console.error('Erro ao fazer login:', error);
         res.status(500).json({ error: 'Erro ao fazer login' });
     }
-}
+};
 
 // Exportando as funções para serem utilizadas em outros arquivos
 module.exports = {

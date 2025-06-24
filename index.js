@@ -5,11 +5,12 @@ const morgan = require('morgan');
 const cors = require('cors');
 const bodyParser = require('body-parser');
 const knex = require('knex');
+const path = require('path');
 const { listUsers, getUserById, updateUser, deleteUser, insertUser } = require('./Controller/controllerUser');
 const { listCategories, getCategoryById, updateCategory, deleteCategory, insertCategory } = require('./Controller/controllerCategories');
 const { listExpenses, getExpenseById, updateExpense, deleteExpense, insertExpense } = require('./Controller/controllerExpenses');
 const { listRevenues, getRevenueById, updateRevenue, deleteRevenue, insertRevenue } = require('./Controller/controllerRevenues');
-const authenticateToken = require('./middleware/auth');
+const authenticateToken = require('./Middleware/auth');
 const { loginUser, refreshToken, logoutUser } = require('./Controller/controllerAuth');
 
 
@@ -25,46 +26,79 @@ app.use(bodyParser.json());
 /* O body-parser.urlencoded() no Express.js é um middleware que analisa o corpo de uma requisição HTTP que contém dados codificados como URL. Isso é útil quando você está recebendo dados de formulários ou dados que foram enviados no formato application/x-www-form-urlencoded, que é o formato padrão para envio de dados de formulários HTML*/
 app.use(bodyParser.urlencoded({ extended: true }));
 
-//ROUTES AUTH
+// Configurando o diretório estático para servir arquivos HTML, CSS e JS
+app.use(express.static(path.join(__dirname, 'View')));
+// Configurando o diretório estático para servir arquivos de imagem
+app.use('/images', express.static(path.join(__dirname, 'View/images')));
+
+// Rotas públicas (sem autenticação)
+app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, 'View/html/login.html'));
+});
+
+app.get('/login', (req, res) => {
+    res.sendFile(path.join(__dirname, 'View/html/login.html'));
+});
+
+app.get('/register', (req, res) => {
+    res.sendFile(path.join(__dirname, 'View/html/register.html'));
+});
+
+// Rota pública para exibir os Termos de Privacidade
+app.get('/terms', (req, res) => {
+    res.sendFile(path.join(__dirname, 'View/html/terms.html'));
+});
+
+// Rota pública para exibir o Contato
+app.get('/contact', (req, res) => {
+    res.sendFile(path.join(__dirname, 'View/html/contact.html'));
+});
+
+app.get('/dashboard', (req, res) => {
+    res.sendFile(path.join(__dirname, 'View/html/dashboard.html'));
+});
+
+app.get('/profile', (req, res) => {
+    res.sendFile(path.join(__dirname, 'View/html/profile.html'));
+});
+
+
 app.post('/login', loginUser); // Rota para login de usuário
 app.post('/refresh-token', refreshToken); // Rota para atualizar o token de acesso
 app.post('/logout', logoutUser); // Rota para logout de usuário
-app.post('/users', insertUser); 
+app.post('/users', insertUser); // Rota para cadastro de usuário
 
 // Middleware para autenticação de token
-app.use(authenticateToken); // Middleware para autenticação de token em todas as rotas abaixo
+app.use(authenticateToken); // Aplicar autenticação apenas nas rotas abaixo
 
+// Rotas protegidas para usuários
+app.get('/listusers', listUsers);
+app.get('/users/:id', getUserById);
+app.put('/users/:id', updateUser);
+app.delete('/users/:id', deleteUser);
 
-//ROUTES USERS
-app.get('/listusers',  listUsers); // Rota para listar todos os usuários
-app.get('/users/:id',  getUserById); // Rota para obter um usuário específico pelo ID
-app.put('/users/:id', updateUser); // Rota para atualizar um usuário específico pelo ID
-app.delete('/users/:id', deleteUser); // Rota para deletar um usuário específico pelo ID
-// Rota para inserir um novo usuário
+// Rotas protegidas para categorias
+app.get('/categories', listCategories);
+app.get('/categories/:id', getCategoryById);
+app.put('/categories/:id', updateCategory);
+app.delete('/categories/:id', deleteCategory);
+app.post('/categories', insertCategory);
 
-//ROUTES CATEGORIES
-app.get('/categories', listCategories); // Rota para listar todas as categorias
-app.get('/categories/:id', getCategoryById); // Rota para obter uma categoria específica pelo ID
-app.put('/categories/:id', updateCategory); // Rota para atualizar uma categoria específica pelo ID
-app.delete('/categories/:id', deleteCategory); // Rota para deletar uma categoria específica pelo ID
-app.post('/categories', insertCategory); // Rota para inserir uma nova categoria
+// Rotas protegidas para despesas
+app.get('/expenses', listExpenses);
+app.get('/expenses/:id', getExpenseById);
+app.put('/expenses/:id', updateExpense);
+app.delete('/expenses/:id', deleteExpense);
+app.post('/expenses', insertExpense);
 
-//ROUTES EXPENSES
-app.get('/expenses', listExpenses); // Rota para listar todas as despesas
-app.get('/expenses/:id', getExpenseById); // Rota para obter uma despesa específica pelo ID
-app.put('/expenses/:id', updateExpense); // Rota para atualizar uma despesa específica pelo ID
-app.delete('/expenses/:id', deleteExpense); // Rota para deletar uma despesa específica pelo ID
-app.post('/expenses', insertExpense); // Rota para inserir uma nova despesa
-
-//ROUTES REVENUES
-app.get('/revenues', listRevenues); // Rota para listar todas as receitas
-app.get('/revenues/:id', getRevenueById); // Rota para obter uma receita específica pelo ID
-app.put('/revenues/:id', updateRevenue); // Rota para atualizar uma receita específica pelo ID
-app.delete('/revenues/:id', deleteRevenue); // Rota para deletar uma receita específica pelo ID
-app.post('/revenues', insertRevenue); // Rota para inserir uma nova receita
+// Rotas protegidas para receitas
+app.get('/revenues', listRevenues);
+app.get('/revenues/:id', getRevenueById);
+app.put('/revenues/:id', updateRevenue);
+app.delete('/revenues/:id', deleteRevenue);
+app.post('/revenues', insertRevenue);
 
 // o servidor irá rodar dentro da porta 3000
 app.listen(3000, () => {
     console.log('Servidor rodando na porta 3000');
-}   );
-
+});

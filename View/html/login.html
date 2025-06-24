@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>FinanFlow - Login</title>
+    <link rel="stylesheet" href="../css/login.css">
+</head>
+<body>
+    <form class="login-container" id="loginForm">
+        <img src="../img/logo.png" alt="Logo FinanFlow" class="logo">
+        <div>
+            <label for="email">Email</label>
+            <input type="email" id="email" placeholder="Digite seu email" required>
+        </div>
+        <div>
+            <label for="password">Senha</label>
+            <input type="password" id="password" placeholder="Digite sua senha" required>
+        </div>
+        <div style="text-align:left; margin-bottom: 10px;">
+            <input type="checkbox" id="remember"> <label for="remember" style="display:inline;">Lembrar login</label>
+        </div>
+        <div class="error" id="errorMsg"></div>
+        <button type="submit">Entrar</button>
+        <div class="links">
+            Não tem conta? <a href="/register">Cadastre-se</a>
+        </div>
+    </form>
+    <script src="../js/login.js"></script>
+</body>
+</html>

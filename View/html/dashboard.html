@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Dashboard - FinanFlow</title>
+    <link rel="stylesheet" href="../css/dashboard.css" />
+  </head>
+  <body>
+    <div class="navbar">
+      <span class="logo">FinanFlow</span>
+      <span class="menu">
+        <a href="/profile">Perfil</a>
+        <a href="/dashboard">Dashboard</a>
+        <a href="/contact">Contato</a>
+        <a href="/login">Sair</a>
+      </span>
+    </div>
+    <div class="dashboard-container">
+      <h1>Dashboard</h1>
+      <div class="summary">
+        <div class="card saldo">
+          <h2>Saldo</h2>
+          <p id="saldo">R$ 0,00</p>
+        </div>
+        <div class="card receitas">
+          <h2>Receitas</h2>
+          <p id="receitas">+R$ 0,00</p>
+        </div>
+        <div class="card despesas">
+          <h2>Despesas</h2>
+          <p id="despesas">-R$ 0,00</p>
+        </div>
+      </div>
+      <div class="actions">
+        <button class="btn nova-receita">Nova Receita</button>
+        <button class="btn nova-despesa">Nova Despesa</button>
+      </div>
+      <div class="details">
+        <div class="receitas">
+          <h2>Últimas receitas</h2>
+          <table>
+            <thead>
+              <tr>
+                <th>Título</th>
+                <th>Valor</th>
+                <th>Data</th>
+              </tr>
+            </thead>
+            <tbody id="receitas-list">
+              <!-- Receitas dinâmicas serão inseridas aqui -->
+            </tbody>
+          </table>
+        </div>
+        <div class="despesas">
+          <h2>Últimas despesas</h2>
+          <table>
+            <thead>
+              <tr>
+                <th>Título</th>
+                <th>Valor</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody id="despesas-list">
+              <!-- Despesas dinâmicas serão inseridas aqui -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <script src="../js/dashboard.js"></script>
+  </body>
+</html>

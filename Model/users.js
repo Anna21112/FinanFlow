@@ -51,10 +51,23 @@ async function insertUser(data) {
     }
 }
 
+const selectUserByEmail = async (emailLogado) => {
+    try {
+        const user = await db('users').where({ email: emailLogado }).first(); // Retorna o primeiro usuário encontrado com o e-mail
+        if (!user) {
+            return null; // Retorna null se nenhum usuário for encontrado
+        }
+        return { ...user }; // Converte o RowDataPacket para um objeto simples
+    } catch (error) {
+        console.error('Erro ao buscar usuário por e-mail:', error);
+        throw error;
+    }
+};
 
 module.exports = {
     selectUsers,
     selectUserById,
+    selectUserByEmail, // Adicione esta função ao export
     updateUser,
     deleteUser,
     insertUser

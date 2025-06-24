@@ -1,0 +1,147 @@
+body {
+    background: #b3d0ec;
+    font-family: 'Times New Roman', Times, serif;
+}
+
+.navbar {
+    background: #2a4270;
+    color: #fff;
+    padding: 18px 0 18px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-left: 60px;
+    padding-right: 60px;
+}
+.navbar .logo {
+    font-size: 1.5rem;
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+.navbar .menu a {
+    color: #fff;
+    text-decoration: none;
+    margin-left: 32px;
+    font-size: 1.1rem;
+}
+.navbar .menu a:hover {
+    text-decoration: underline;
+}
+.content {
+    max-width: 800px;
+    margin: 40px auto 0 auto;
+    background: #fff;
+    border-radius: 18px;
+    padding: 40px 40px 30px 40px;
+    box-shadow: 0 2px 16px rgba(0,0,0,0.07);
+}
+
+.dashboard-container {
+    max-width: 800px;
+    margin: 40px auto;
+    text-align: center;
+}
+
+.dashboard-container h1 {
+    color: #142047;
+    font-size: 2rem;
+    margin-bottom: 20px;
+}
+
+.summary {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.card {
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 16px rgba(0,0,0,0.07);
+    width: 30%;
+    text-align: center;
+}
+
+.card h2 {
+    color: #142047;
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+}
+
+.card p {
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.saldo {
+    background: #e3f2fd;
+}
+
+.receitas {
+    background: #e8f5e9;
+}
+
+.despesas {
+    background: #ffebee;
+}
+
+.actions {
+    margin-bottom: 20px;
+}
+
+.btn {
+    background: #0f2658;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 6px;
+    font-size: 1rem;
+    cursor: pointer;
+    margin: 0 10px;
+}
+
+.btn:hover {
+    background: #1746a2;
+}
+
+.details {
+    display: flex;
+    justify-content: space-between;
+}
+
+.details .receitas,
+.details .despesas {
+    width: 48%;
+    border-radius: 12px;
+    overflow: hidden; 
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+table th, table td {
+    text-align: left;
+    padding: 8px;
+    border-bottom: 1px solid #dbe2ea;
+}
+
+table th {
+    color: #142047;
+    font-weight: bold;
+}
+
+.edit {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 1rem;
+    color: #2563eb;
+}
+
+.edit:hover {
+    text-decoration: underline;
+}
