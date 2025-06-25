@@ -1,6 +1,8 @@
 
 const dbUsers = require('../Model/users.js'); // Importando o arquivo de conexão com o banco de dados
 
+
+
 const listUsers = async (req, res) => {
     try {
         const users = await dbUsers.selectUsers(); // Chama a função para selecionar os usuários do banco de dados
@@ -61,7 +63,7 @@ const insertUser = async (req, res) => {
     const { email, name, pass } = req.body; // Obtém os dados do novo usuário
     try {
         // Verifica se o e-mail já existe
-        const existingUser = await dbUsers.selectUserByEmail(email);
+        const existingUser = await dbUsers.selectUserEmail(email);
         if (existingUser) {
             return res.status(400).json({ message: 'E-mail já cadastrado. Por favor, use outro e-mail.' });
         }
@@ -75,29 +77,6 @@ const insertUser = async (req, res) => {
     }
 };
 
-const loginUser = async (req, res) => {
-    const { email, pass } = req.body;
-    try {
-        const user = await dbUsers.selectUserByEmail(email);
-
-        if (!user || user.pass !== pass) {
-            return res.status(401).json({ message: 'E-mail ou senha inválidos' });
-        }
-
-        const accessToken = jwt.sign({ id: user.idUsers }, SECRET, { expiresIn: '1h' }); // Use idUsers aqui
-        const refreshToken = jwt.sign({ id: user.idUsers }, SECRET, { expiresIn: '7d' }); // Use idUsers aqui
-        console.log('Usuário logado:', user.idUsers); // Log do ID do usuário
-        
-        res.json({
-            accessToken,
-            refreshToken,
-            userId: user.idUsers // Certifique-se de que o ID do usuário está sendo retornado corretamente
-        });
-    } catch (error) {
-        console.error('Erro ao fazer login:', error);
-        res.status(500).json({ error: 'Erro ao fazer login' });
-    }
-};
 
 // Exportando as funções para serem utilizadas em outros arquivos
 module.exports = {
@@ -105,6 +84,5 @@ module.exports = {
     getUserById,
     updateUser,
     deleteUser,
-    insertUser,
-    loginUser
+    insertUser
 }

@@ -145,3 +145,16 @@ table th {
 .edit:hover {
     text-decoration: underline;
 }
+
+#modal-overlay {
+    animation: fadeIn 0.2s;
+}
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+.modal-form input, .modal-form button {
+    display: block;
+    margin: 0.5rem 0;
+    width: 100%;
+}

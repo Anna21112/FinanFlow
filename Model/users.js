@@ -51,9 +51,12 @@ async function insertUser(data) {
     }
 }
 
-const selectUserByEmail = async (emailLogado) => {
+const selectUserEmail = async (emailLogado) => {
     try {
-        const user = await db('users').where({ email: emailLogado }).first(); // Retorna o primeiro usuário encontrado com o e-mail
+        const user = await db('users').where({ email: emailLogado }).first(); 
+
+        console.log('Usuário encontrado:', user);
+
         if (!user) {
             return null; // Retorna null se nenhum usuário for encontrado
         }
@@ -67,7 +70,7 @@ const selectUserByEmail = async (emailLogado) => {
 module.exports = {
     selectUsers,
     selectUserById,
-    selectUserByEmail, // Adicione esta função ao export
+    selectUserEmail, // Adicione esta função ao export
     updateUser,
     deleteUser,
     insertUser

@@ -2,16 +2,13 @@ const dbCategories = require('../Model/expenses');
 
 const listExpenses = async (req, res) => {
     try {
-        const expenses = await dbCategories.selectExpenses(); // Chama a função para selecionar as despesas do banco de dados
-        if (expenses.length === 0) {
-            return res.status(404).json({ message: 'Nenhuma despesa encontrada' });
-        }   
-        res.json(expenses); // Retorna as despesas encontradas
+        const expenses = await dbCategories.selectExpenses();
+        res.json(expenses); // Sempre retorna array, mesmo vazio
     } catch (error) {
         console.error('Erro ao listar despesas:', error);
         res.status(500).json({ error: 'Erro ao listar despesas' });
     }
-}
+};
 
 const getExpenseById = async (req, res) => {
     const { id } = req.params; // Obtém o ID da despesa a partir dos parâmetros da requisição

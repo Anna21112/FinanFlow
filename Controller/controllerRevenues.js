@@ -3,11 +3,8 @@ const dbRevenues = require('../Model/revenues');
 // Lista todas as receitas do banco de dados
 const listRevenues = async (req, res) => {
     try {
-        const revenues = await dbRevenues.selectRevenues(); // Chama a função para selecionar as receitas do banco de dados
-        if (revenues.length === 0) {
-            return res.status(404).json({ message: 'Nenhuma receita encontrada' });
-        }   
-        res.json(revenues); // Retorna as receitas encontradas
+        const revenues = await dbRevenues.selectRevenues();
+        res.json(revenues); // Sempre retorna array, mesmo vazio
     } catch (error) {
         console.error('Erro ao listar receitas:', error);
         res.status(500).json({ error: 'Erro ao listar receitas' });

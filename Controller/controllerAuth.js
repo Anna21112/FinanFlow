@@ -6,32 +6,23 @@ const REFRESH_SECRET = 'seu_segredo_refresh';
 let refreshTokens = []; 
 
 const loginUser = async (req, res) => {
-
-    console.log("Email recebido:", req.body.email);
-    console.log("Senha recebida:", req.body.pass);
-
     const { email, pass } = req.body;
     try {
-        const users = await dbUsers.selectUsers();
-        console.log("Usuários encontrados:", users);
-        const foundUser = users.find(u => u.email == email && u.pass == pass);
+        const user = await dbUsers.selectUserEmail(email);
 
-        console.log(foundUser)
-        if (!foundUser) {
+        if (!user || user.pass !== pass) {
             return res.status(401).json({ message: 'E-mail ou senha inválidos' });
         }
-        const accessToken = jwt.sign(
-            { id: foundUser.idUsers, email: foundUser.email },
-            ACCESS_SECRET,
-            { expiresIn: '8h' }
-        );
-        const refreshToken = jwt.sign(
-            { id: foundUser.idUsers, email: foundUser.email },
-            REFRESH_SECRET,
-            { expiresIn: '7d' }
-        );
-        refreshTokens.push(refreshToken); // Salva o refresh token
-        res.json({ accessToken, refreshToken });
+
+        const accessToken = jwt.sign({ id: user.idUsers }, ACCESS_SECRET, { expiresIn: '1h' }); // Use idUsers aqui
+        const refreshToken = jwt.sign({ id: user.idUsers }, REFRESH_SECRET, { expiresIn: '7d' }); // Use idUsers aqui
+        console.log('Usuário logado:', user.idUsers); // Log do ID do usuário
+        
+        res.json({
+            accessToken,
+            refreshToken,
+            userId: user.idUsers // Certifique-se de que o ID do usuário está sendo retornado corretamente
+        });
     } catch (error) {
         console.error('Erro ao fazer login:', error);
         res.status(500).json({ error: 'Erro ao fazer login' });
